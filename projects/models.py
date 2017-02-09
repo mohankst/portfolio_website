@@ -6,21 +6,16 @@ from django.utils.text import slugify
 class Project(models.Model):
 		title = models.CharField(max_length=255)
 		slug = models.SlugField(unique=True)
+		image = models.ImageField(null=True, blank= True)
 		description = models.TextField(null=True, blank = True)
+		catagory = models.CharField(max_length=100, null=True, blank = True)
 
 		def __str__ (self):
 			return self.title
 
 
-class Image(models.Model):
-	title = models.CharField(max_length=255)
-	project_image = models.ImageField(blank=True, null=True)
-	project = models.ForeignKey(Project)
-
-	def __str__(self):
-		return self.title
-
 #Creating auto slug field
+"""
 def create_slug(instance, new_slug=None):
 	slug = slugify(instance.title)
 	if new_slug is not None:
@@ -38,3 +33,4 @@ def pre_save_project_recever(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_project_recever, sender=Project)
+"""
